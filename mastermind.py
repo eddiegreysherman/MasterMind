@@ -15,8 +15,6 @@ hints = []
 
 for i in range(4):
    num = int(input("Guess a number (1-6): "))
-   if num in [1, 2, 3, 4, 5, 6]:
-    guess_code.append(num)
 
 print(code)
 
@@ -33,5 +31,5 @@ hints = process_guess(code, guess_code)
 
 attempts = [guess_code, hints]
 
-print(attempts[1][0])
+print(attempts)
 
