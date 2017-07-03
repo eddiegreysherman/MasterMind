@@ -18,7 +18,7 @@ for i in range(4):
    if num in [1, 2, 3, 4, 5, 6]:
     guess_code.append(num)
 
-print(guess_code)
+print(code)
 
 def process_guess(a,b):
     for i in range(4):
@@ -28,4 +28,10 @@ def process_guess(a,b):
             hints.append("W")
     return hints
 
-print(process_guess(code, guess_code))
+# trying to get a nested list going for display purposes...
+hints = process_guess(code, guess_code)
+
+attempts = [guess_code, hints]
+
+print(attempts[1][0])
+
