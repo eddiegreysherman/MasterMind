@@ -13,10 +13,20 @@ print(code)
 guess_code = []
 hints = []
 
-for i in range(4):
-   num = int(input("Guess a number (1-6): "))
-   if num in [1, 2, 3, 4, 5, 6]:
-    guess_code.append(num)
+i = 1
+while i <= 4:
+    num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
+    if not num.isnumeric():
+        print("Please enter a NUMBER, 1 - 6.")
+        continue
+    else:
+        num = int(num)
+
+    if num in [1, 2, 3, 4, 5, 6]:
+        guess_code.append(num)
+        i += 1
+    else:
+        print("The number must be 1 through 6.")
 
 print(code)
 
@@ -33,5 +43,5 @@ hints = process_guess(code, guess_code)
 
 attempts = [guess_code, hints]
 
-print(attempts[1][0])
+print(attempts)
 
