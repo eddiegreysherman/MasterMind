@@ -31,7 +31,7 @@ while len(attempts) < 10:
         else:
             print("The number must be 1 through 6.")
 
-    print(code)
+
 
     def process_guess(a,b):
         for i in range(4):
@@ -58,4 +58,5 @@ while len(attempts) < 10:
         print(str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
 
 if hints != ['B', 'B', 'B', 'B']:
+    print("The code was " + str(code))
     print("YOU LOST!!!!")
