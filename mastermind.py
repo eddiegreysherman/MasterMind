@@ -10,11 +10,11 @@ code = generate_code()
 
 print(code)
 
-guess_code = []
-hints = []
 attempts = []
 
 while len(attempts) < 10:
+    guess_code = []
+    hints = []
     i = 1
     while i <= 4:
         num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
@@ -43,8 +43,13 @@ while len(attempts) < 10:
     # trying to get a nested list going for display purposes...
     hints = process_guess(code, guess_code)
 
-    #attempts.append([[guess_code, hints]])
-    attempts.append(list([guess_code, hints]))
+    if hints == ['B', 'B', 'B', 'B']:
+        print("YOU WIN!!!!!!!!!")
+        break
+
+
+    attempts.append([[guess_code, hints]])
+    # attempts.append(guess_code, hints)
 
     for _ in range(len(attempts)):
-        print(attempts)
+        print(attempts[_])
