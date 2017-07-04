@@ -13,11 +13,13 @@ code = generate_code()
 
 attempts = []
 os.system('clear')
+
 while len(attempts) < 10:
     guess_code = []
     hints = []
     seen = []
     i = 1
+    print(code)
     while i <= 4:
         num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
         if not num.isnumeric():
@@ -34,7 +36,7 @@ while len(attempts) < 10:
 
 
 
-    def process_guess(b,a):
+    def process_guess(a, b):
 
         if a == b:
             return ['B', 'B', 'B', 'B']
@@ -51,6 +53,7 @@ while len(attempts) < 10:
                     hints.append("W")
                     # mark current number as seen
                     seen.append(a[i])
+                    continue
                 else:
                     # if not already seen this number
                     if not a[i] in seen:
@@ -58,7 +61,7 @@ while len(attempts) < 10:
                             hints.append("W")
         return hints
 
-    # trying to get a nested list going for display purposes...
+    # the arguments of this function need to be in the correct order...else it breaks
     hints = process_guess(code, guess_code)
 
     if hints == ['B', 'B', 'B', 'B']:
@@ -67,12 +70,11 @@ while len(attempts) < 10:
 
 
     attempts.append([[guess_code, hints]])
-    # attempts.append(guess_code, hints)
 
     os.system('clear')
 
     for _ in range(len(attempts)):
-        print(str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
+        print(str(i) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
 
 if hints != ['B', 'B', 'B', 'B']:
     print("The code was " + str(code))
