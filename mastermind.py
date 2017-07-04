@@ -1,4 +1,5 @@
 import random
+import os
 
 def generate_code():
     master_code = []
@@ -8,10 +9,10 @@ def generate_code():
 
 code = generate_code()
 
-print(code)
+#print(code)
 
 attempts = []
-
+os.system('clear')
 while len(attempts) < 10:
     guess_code = []
     hints = []
@@ -51,5 +52,10 @@ while len(attempts) < 10:
     attempts.append([[guess_code, hints]])
     # attempts.append(guess_code, hints)
 
+    os.system('clear')
+
     for _ in range(len(attempts)):
-        print(attempts[_])
+        print(str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
+
+if hints != ['B', 'B', 'B', 'B']:
+    print("YOU LOST!!!!")
