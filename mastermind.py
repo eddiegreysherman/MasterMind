@@ -32,7 +32,9 @@ while len(attempts) < 10:
             print("The number must be 1 through 6.")
 
 
-
+    # This function needs to be revised because
+    # if there are multiple of the same number it isnt
+    # properly providing the hint
     def process_guess(a,b):
         for i in range(4):
             if a[i] == b[i]:
