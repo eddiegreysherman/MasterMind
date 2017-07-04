@@ -2,6 +2,7 @@ import random
 import os
 
 def generate_code():
+
     master_code = []
     for i in range(4):
         master_code.append(random.randint(1, 6))
@@ -9,13 +10,13 @@ def generate_code():
 
 code = generate_code()
 
-#print(code)
 
 attempts = []
 os.system('clear')
 while len(attempts) < 10:
     guess_code = []
     hints = []
+    seen = []
     i = 1
     while i <= 4:
         num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
@@ -32,15 +33,29 @@ while len(attempts) < 10:
             print("The number must be 1 through 6.")
 
 
-    # This function needs to be revised because
-    # if there are multiple of the same number it isnt
-    # properly providing the hint
-    def process_guess(a,b):
+
+    def process_guess(b,a):
+
+        if a == b:
+            return ['B', 'B', 'B', 'B']
+
         for i in range(4):
-            if a[i] == b[i]:
-                hints.append("B")
-            elif a[i] in b:
-                hints.append("W")
+            # is the current number in the code?
+            if a[i] in b:
+                # is the current number in this location?
+                if a[i] == b[i]:
+                    hints.append("B")
+                # if the the count of current are equal
+                elif a.count(a[i]) == b.count(a[i]):
+                    # give the white hint
+                    hints.append("W")
+                    # mark current number as seen
+                    seen.append(a[i])
+                else:
+                    # if not already seen this number
+                    if not a[i] in seen:
+                        for _ in range(abs(a.count(a[i]) - b.count(a[i]))):
+                            hints.append("W")
         return hints
 
     # trying to get a nested list going for display purposes...
