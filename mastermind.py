@@ -74,7 +74,7 @@ while len(attempts) < 10:
     os.system('clear')
 
     for _ in range(len(attempts)):
-        print(str(i) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
+        print(len(attempts) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
 
 if hints != ['B', 'B', 'B', 'B']:
     print("The code was " + str(code))
