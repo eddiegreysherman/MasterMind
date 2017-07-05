@@ -8,8 +8,8 @@ def generate_code():
         master_code.append(random.randint(1, 6))
     return master_code
 
-code = generate_code()
-
+#code = generate_code()
+code = [2, 2, 1, 6]
 
 attempts = []
 os.system('clear')
@@ -74,7 +74,7 @@ while len(attempts) < 10:
     os.system('clear')
 
     for _ in range(len(attempts)):
-        print(len(attempts) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
+        print(str(len(attempts)) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
 
 if hints != ['B', 'B', 'B', 'B']:
     print("The code was " + str(code))
