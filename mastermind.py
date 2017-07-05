@@ -1,6 +1,8 @@
 import random
+import os
 
 def generate_code():
+
     master_code = []
     for i in range(4):
         master_code.append(random.randint(1, 6))
@@ -8,14 +10,16 @@ def generate_code():
 
 code = generate_code()
 
-print(code)
 
-guess_code = []
-hints = []
 attempts = []
+os.system('clear')
 
 while len(attempts) < 10:
+    guess_code = []
+    hints = []
+    seen = []
     i = 1
+    print(code)
     while i <= 4:
         num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
         if not num.isnumeric():
@@ -30,21 +34,48 @@ while len(attempts) < 10:
         else:
             print("The number must be 1 through 6.")
 
-    print(code)
 
-    def process_guess(a,b):
+
+    def process_guess(a, b):
+
+        if a == b:
+            return ['B', 'B', 'B', 'B']
+
         for i in range(4):
-            if a[i] == b[i]:
-                hints.append("B")
-            elif a[i] in b:
-                hints.append("W")
+            # is the current number in the code?
+            if a[i] in b:
+                # is the current number in this location?
+                if a[i] == b[i]:
+                    hints.append("B")
+                # if the the count of current are equal
+                elif a.count(a[i]) == b.count(a[i]):
+                    # give the white hint
+                    hints.append("W")
+                    # mark current number as seen
+                    seen.append(a[i])
+                    continue
+                else:
+                    # if not already seen this number
+                    if not a[i] in seen:
+                        for _ in range(abs(a.count(a[i]) - b.count(a[i]))):
+                            hints.append("W")
         return hints
 
-    # trying to get a nested list going for display purposes...
+    # the arguments of this function need to be in the correct order...else it breaks
     hints = process_guess(code, guess_code)
 
-    #attempts.append([[guess_code, hints]])
-    attempts.append(list([guess_code, hints]))
+    if hints == ['B', 'B', 'B', 'B']:
+        print("YOU WIN!!!!!!!!!")
+        break
+
+
+    attempts.append([[guess_code, hints]])
+
+    os.system('clear')
 
     for _ in range(len(attempts)):
-        print(attempts)
+        print(str(i) + ": " + str(attempts[_][0][0]) + "\t" + str(attempts[_][0][1]))
+
+if hints != ['B', 'B', 'B', 'B']:
+    print("The code was " + str(code))
+    print("YOU LOST!!!!")
