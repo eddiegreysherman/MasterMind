@@ -45,20 +45,16 @@ while len(attempts) < 10:
             # is the current number in the code?
             if a[i] in b:
                 # is the current number in this location?
-                if a[i] == b[i]:
-                    hints.append("B")
-                # if the the count of current are equal
-                elif a.count(a[i]) == b.count(a[i]):
-                    # give the white hint
-                    hints.append("W")
-                    # mark current number as seen
+                if a[i] not in seen:
+                    b_idx = [idx for idx, num in enumerate(b) if num == a[i]]
+                    a_idx = [idx for idx, num in enumerate(a) if num == a[i]]
+                    w_list = [x for x in a_idx if x not in b_idx]
+                    b_list = [x for x in a_idx if x in b_idx]
+                    for _ in range(len(w_list)):
+                        hints.append("W")
+                    for _ in range(len(b_list)):
+                        hints.append("B")
                     seen.append(a[i])
-                    continue
-                else:
-                    # if not already seen this number
-                    if not a[i] in seen:
-                        for _ in range(abs(a.count(a[i]) - b.count(a[i]))):
-                            hints.append("W")
         return hints
 
     # the arguments of this function need to be in the correct order...else it breaks
