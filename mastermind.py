@@ -1,5 +1,6 @@
 import random
 import os
+import collections
 
 def generate_code():
 
@@ -8,8 +9,8 @@ def generate_code():
         master_code.append(random.randint(1, 6))
     return master_code
 
-#code = generate_code()
-code = [2, 2, 1, 6]
+code = generate_code()
+#code = [2, 2, 1, 6]
 
 attempts = []
 os.system('clear')
@@ -19,7 +20,7 @@ while len(attempts) < 10:
     hints = []
     seen = []
     i = 1
-    print(code)
+    #print(code)
     while i <= 4:
         num = input("Guess number {} in the pattern (Must be 1-6): ".format(i))
         if not num.isnumeric():
@@ -50,11 +51,15 @@ while len(attempts) < 10:
                     a_idx = [idx for idx, num in enumerate(a) if num == a[i]]
                     w_list = [x for x in a_idx if x not in b_idx]
                     b_list = [x for x in a_idx if x in b_idx]
-                    for _ in range(len(w_list)):
-                        hints.append("W")
-                    for _ in range(len(b_list)):
-                        hints.append("B")
-                    seen.append(a[i])
+                    if len(a_idx) > len(b_idx):
+                        for _ in range(len(b_list)):
+                            hints.append("B")
+                    else:
+                        for _ in range(len(w_list)):
+                            hints.append("W")
+                        for _ in range(len(b_list)):
+                            hints.append("B")
+                seen.append(a[i])
         return hints
 
     # the arguments of this function need to be in the correct order...else it breaks
